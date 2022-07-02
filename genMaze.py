@@ -22,6 +22,11 @@ class Maze:
 
         return "\n".join(lines)
 
+    def getField(self):
+        """
+        fieldを出力
+        """
+        return self.field
 
     def isForwardable(self, x, y, dir):
         """
