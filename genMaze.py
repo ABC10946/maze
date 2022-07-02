@@ -1,16 +1,18 @@
 import random
 import sys
 
+
 class Maze:
     """
     dir -> 0 右, 1 上, 2 左, 3 下
     field cell 0 -> 壁, 1 -> 道
     """
+
     def __init__(self, mazeWidth, mazeHeight):
         self.mazeWidth = mazeWidth
         self.mazeHeight = mazeHeight
-        self.field = [[0 for _ in range(self.mazeWidth)] for _ in range(self.mazeHeight)]
-
+        self.field = [[0 for _ in range(self.mazeWidth)]
+                      for _ in range(self.mazeHeight)]
 
     def getStrField(self):
         """
@@ -41,7 +43,6 @@ class Maze:
         elif dir == 3:
             return self.getCell(x, y+2) == 0
 
-
     def getCell(self, x, y):
         """
         座標(x,y)がfieldの範囲内であればマスの情報を取得
@@ -51,7 +52,6 @@ class Maze:
             return self.field[y][x]
         else:
             return -1
-
 
     def dig(self, x, y, dir):
         """
@@ -69,8 +69,6 @@ class Maze:
         elif dir == 3:
             self.field[y+1][x] = 1
             self.field[y+2][x] = 1
-        
-
 
     def genMaze(self, startX, startY):
         """
@@ -89,14 +87,14 @@ class Maze:
             isAllDirStacked = True
             for i in range(4):
                 isAllDirStacked &= not self.isForwardable(tempX, tempY, i)
-            
+
             if isAllDirStacked and len(pos_stack) == 0:
                 # 経路生成終了
                 break
-            
+
             if isAllDirStacked and len(pos_stack) != 0:
                 tempX, tempY = pos_stack.pop()
-            
+
             randomDir = random.randint(0, 3)
             if self.isForwardable(tempX, tempY, randomDir):
                 pos_stack.append((tempX, tempY))
